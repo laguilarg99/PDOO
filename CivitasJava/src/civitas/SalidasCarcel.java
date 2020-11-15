@@ -9,10 +9,7 @@ package civitas;
  *
  * @author luis
  */
-public enum OperacionesJuego {
-    AVANZAR,
-    COMPRAR,
-    GESTIONAR,
-    SALIR_CARCEL,
-    PASAR_TURNO
+public enum SalidasCarcel {
+    PAGANDO,
+    TIRANDO
 }

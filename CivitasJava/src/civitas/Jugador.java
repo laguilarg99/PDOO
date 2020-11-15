@@ -88,12 +88,18 @@ public class Jugador implements Comparable<Jugador> {
         return puedeComprar;
     }
     
-    protected ArrayList<TituloPropiedad> getPropiedades(){
+    public ArrayList<TituloPropiedad> getPropiedades(){ //Cambiada la visibilidad Protected -> Public para el método gestiones de la clase VistaTextual
         return propiedades;
     }
     
     int cantidadCasasHoteles(){
-        return propiedades.size();
+        int cantidad = 0;
+        
+        for(int i = 0; i < getPropiedades().size(); i++){
+            cantidad = cantidad + propiedades.get(i).getNumCasas() + propiedades.get(i).getNumHoteles();
+        }
+        
+        return cantidad;
     }
     
     public boolean isEncarcelado(){

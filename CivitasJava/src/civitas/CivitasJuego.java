@@ -123,7 +123,7 @@ public class CivitasJuego {
         return jugadores.get(indiceJugadorActual);
     }
     
-    private ArrayList<Jugador> ranking(){
+    public ArrayList<Jugador> ranking(){ //cambiar visibilidad de private a public para usarlo en el controlador
         Collections.sort(jugadores, Jugador::compareTo);
         return jugadores;
     }
