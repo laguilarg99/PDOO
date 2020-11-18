@@ -54,7 +54,7 @@ public class CivitasJuego {
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa2"));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Gonzalo Gallas", 13, 700, 400, 70, 600)));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Camino de Ronda", 14, 800, 500, 80, 700)));
-        tablero.añadeCasilla(new Casilla(5, "Juez"));
+        tablero.añadeCasilla(new Casilla(tablero.getCarcel(), "Juez"));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Gran Via de Colón", 14, 800, 500, 80, 700)));
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa3"));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Yanguas", 15, 1000, 750, 100, 1000)));

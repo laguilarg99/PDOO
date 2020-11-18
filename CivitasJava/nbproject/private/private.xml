@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/GestorEstados.java</file>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/CivitasJuego.java</file>
             <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/juegoTexto/JuegoPrueba.java</file>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/Dado.java</file>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/SalidasCarcel.java</file>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/Diario.java</file>
-            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/Tablero.java</file>
             <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/juegoTexto/Controlador.java</file>
             <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/juegoTexto/VistaTextual.java</file>
+            <file>file:/home/luis/UNI/4/1/PDOO/Prácticas/Fuente/CivitasJava/src/civitas/Casilla.java</file>
         </group>
     </open-files>
 </project-private>

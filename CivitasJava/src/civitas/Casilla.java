@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Casilla {
     private String nombre;
     private float importe;
-    private static int carcel;
+    private int carcel;
     private TipoCasilla tipo;
     private TituloPropiedad tituloPropiedad;
     private MazoSorpresas mazo;
