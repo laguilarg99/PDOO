@@ -85,7 +85,7 @@ public class Jugador implements Comparable<Jugador> {
     }
     
     boolean getPuedeComprar(){
-        return puedeComprar;
+        return this.puedeComprarCasilla();
     }
     
     public ArrayList<TituloPropiedad> getPropiedades(){ //Cambiada la visibilidad Protected -> Public para el método gestiones de la clase VistaTextual
@@ -189,7 +189,10 @@ public class Jugador implements Comparable<Jugador> {
     boolean modificarSaldo(float cantidad){
         this.saldo = saldo + cantidad;
         Diario diary = Diario.getInstance();
-        diary.ocurreEvento("Saldo aumentado: " + cantidad + " para " + this.getNombre());
+        if(cantidad < 0)
+            diary.ocurreEvento("Saldo disminuido: " + cantidad + " para " + this.getNombre());
+        else
+            diary.ocurreEvento("Saldo aumentado: " + cantidad + " para " + this.getNombre());
         return true;
     }
     
@@ -359,7 +362,7 @@ public class Jugador implements Comparable<Jugador> {
                     result = propiedad.cancelarHipoteca(this);
                     if(result){
                         Diario diary = Diario.getInstance();
-                        diary.ocurreEvento("El jugador" + this.nombre + "cancela la hipoteca de la propiedad " + ip);
+                        diary.ocurreEvento("El jugador " + this.nombre + " cancela la hipoteca de la propiedad " + ip);
                     }
                 }
             }
@@ -381,7 +384,7 @@ public class Jugador implements Comparable<Jugador> {
                     if(result){
                         propiedades.add(titulo);
                         Diario diary = Diario.getInstance();
-                        diary.ocurreEvento("El jugador" + this.nombre + "compra la propiedad " + titulo.toString());
+                        diary.ocurreEvento("El jugador " + this.nombre + " compra la propiedad " + titulo.toString());
                     }
                     
                     puedeComprar = false;
@@ -413,7 +416,7 @@ public class Jugador implements Comparable<Jugador> {
                     propiedad.derruirCasas(casasPorHotel,this);
                     if(result){
                         Diario diary = Diario.getInstance();
-                        diary.ocurreEvento("El jugador" + this.nombre + "construye un hotel en la propiedad " + ip);
+                        diary.ocurreEvento("El jugador " + this.nombre + " construye un hotel en la propiedad " + ip);
                     }
                 }
                
@@ -442,7 +445,7 @@ public class Jugador implements Comparable<Jugador> {
                     
                     if(result){
                         Diario diary = Diario.getInstance();
-                        diary.ocurreEvento("El jugador" + this.nombre + "construye un hotel en la propiedad " + ip);
+                        diary.ocurreEvento("El jugador " + this.nombre + " construye una casa en la propiedad " + ip);
                     }
                 }
                
@@ -465,7 +468,7 @@ public class Jugador implements Comparable<Jugador> {
         }
         if(result){
             Diario diary = Diario.getInstance();
-            diary.ocurreEvento("El jugador" + this.nombre + "hipoteca la propiedad " + ip);
+            diary.ocurreEvento("El jugador " + this.nombre + " hipoteca la propiedad " + ip);
         }
         
         return result;

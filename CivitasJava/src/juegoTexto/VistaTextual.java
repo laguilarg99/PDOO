@@ -12,7 +12,7 @@ import civitas.Jugador;
 import civitas.TituloPropiedad;
 import civitas.Respuestas;
 
-public class VistaTextual { //Cambiada visibilidad Package -> public para importar la clase en la prueba
+class VistaTextual { 
   
   CivitasJuego juegoModel; 
   int iGestion=-1;
@@ -21,7 +21,7 @@ public class VistaTextual { //Cambiada visibilidad Package -> public para import
   
   private Scanner in;
   
-  public VistaTextual () { //Cambiada visibilidad Package -> public para importar la clase en la prueba
+  VistaTextual () { 
     in = new Scanner (System.in);
   }
   
@@ -39,17 +39,17 @@ public class VistaTextual { //Cambiada visibilidad Package -> public para import
     String cadena;
     int numero = -1;
     do {
-      System.out.print (msg1);
+      System.out.print (msg1 + "\n");
       cadena = in.nextLine();
       try {  
         numero = Integer.parseInt(cadena);
         ok = true;
       } catch (NumberFormatException e) { // No se ha introducido un entero
-        System.out.println (msg2);
+        System.out.println (msg2 + "\n");
         ok = false;  
       }
       if (ok && (numero < 0 || numero >= max)) {
-        System.out.println (msg2);
+        System.out.println (msg2 + "\n");
         ok = false;
       }
     } while (!ok);
@@ -89,10 +89,15 @@ public class VistaTextual { //Cambiada visibilidad Package -> public para import
     ArrayList<String> opciones = new ArrayList<>(Arrays.asList("Vender", "Hipotecar", "Cancelar hipoteca", "Contruir casa", "Construir hotel", "Terminar"));
     int opcion = menu (titulo, opciones);
     iGestion = opcion;
-    String tab = "  ";
-    iPropiedad = leeEntero(juegoModel.getJugadorActual().getPropiedades().size(),
-                          "\n"+tab+"Elige un número de propiedad: ",
-                          tab+"Valor erróneo");
+    if(opcion != 5){
+        String tab = "  ";
+        String titulo1 = "Sobre que propiedad: ";
+        ArrayList<String> Properties = new ArrayList();
+        for(int i = 0; i < juegoModel.getJugadorActual().getPropiedades().size(); i++)
+            Properties.add((juegoModel.getJugadorActual().getPropiedades()).get(i).toString());
+        
+        iPropiedad = menu(titulo1, Properties);
+    }
   }
   
   public int getGestion(){
@@ -111,9 +116,11 @@ public class VistaTextual { //Cambiada visibilidad Package -> public para import
 
   void mostrarEventos() {
       Diario diary = Diario.getInstance();
+      System.out.println("\n");
       for(int i = 0; diary.eventosPendientes(); i++){
-          diary.leerEvento();
+          System.out.println(diary.leerEvento());
       }
+      System.out.println("\n");
   }
   
   public void setCivitasJuego(CivitasJuego civitas){ 
@@ -122,8 +129,8 @@ public class VistaTextual { //Cambiada visibilidad Package -> public para import
   }
   
   void actualizarVista(){
-      juegoModel.getJugadorActual().toString();
-      juegoModel.getCasillaActual().toString();
+      System.out.println(juegoModel.getJugadorActual().toString());
+      System.out.println(juegoModel.getCasillaActual().toString());
   
   } 
 }

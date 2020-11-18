@@ -29,7 +29,7 @@ public class CivitasJuego {
         }
         
         gestorEstados = new GestorEstados();
-        gestorEstados.estadoInicial();
+        estado = gestorEstados.estadoInicial();
         
         indiceJugadorActual = dado.quienEmpieza(nombres.size());
         
@@ -46,7 +46,7 @@ public class CivitasJuego {
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa1"));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Valle Gran Rey", 11, 600, 300, 60, 300)));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Santo Cristo", 11, 600, 300, 60, 400)));
-        tablero.añadeCasilla(new Casilla(7500f, "Impuesto"));
+        tablero.añadeCasilla(new Casilla(1000f, "Impuesto"));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Recogidas", 12, 600, 300, 60, 400)));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad( "Calle Gracia", 12, 600, 350, 65, 500)));
         tablero.añadeCasilla(new Casilla("PARKING"));
@@ -75,7 +75,7 @@ public class CivitasJuego {
     }
     
     private void contabilizarPasosPorSalida(Jugador jugadorActual){
-        if(tablero.getPorSalida() > 0){
+        if(tablero.getPorSalida() > 0 && jugadorActual.getNumCasillaActual() == 0){
             jugadorActual.pasaPorSalida();
         }
     }
@@ -85,7 +85,7 @@ public class CivitasJuego {
     }
     
     public void siguientePasoCompletado(OperacionesJuego operacion){
-        gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual), estado, operacion);
+        estado = gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual), estado, operacion);
     }
     
     public boolean vender(int ip){
@@ -115,6 +115,7 @@ public class CivitasJuego {
         return result;
     }
     
+    
     public Casilla getCasillaActual(){
         return tablero.getCasilla(jugadores.get(indiceJugadorActual).getNumCasillaActual());
     }
@@ -123,7 +124,7 @@ public class CivitasJuego {
         return jugadores.get(indiceJugadorActual);
     }
     
-    public ArrayList<Jugador> ranking(){ //cambiar visibilidad de private a public para usarlo en el controlador
+    public ArrayList<Jugador> ranking(){ 
         Collections.sort(jugadores, Jugador::compareTo);
         return jugadores;
     }

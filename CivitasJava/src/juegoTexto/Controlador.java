@@ -21,13 +21,13 @@ public class Controlador {
     CivitasJuego juego;
     
     public Controlador(CivitasJuego juego, VistaTextual vista){ //visibilidad cambiada a public para que el uso en la prueba
-        juego = this.juego;
-        vista = this.vista;
+        this.juego= juego;
+        this.vista = vista;
     }
     
     public void juega(){ //visibilidad cambiada a public para que el uso
         vista.setCivitasJuego(juego);
-        while(juego.finalDelJuego()){
+        while(!juego.finalDelJuego()){
             vista.actualizarVista();
             vista.pausa();
             OperacionesJuego operacion = juego.siguientePaso();
@@ -40,9 +40,9 @@ public class Controlador {
                     case COMPRAR:
                         Respuestas respuesta = vista.comprar();
                         if(respuesta == Respuestas.SI){
-                            juego.comprar();
-                            juego.siguientePasoCompletado(operacion);
+                            juego.comprar(); 
                         }
+                        juego.siguientePasoCompletado(operacion);
                         break;
                     case GESTIONAR:
                         vista.gestionar();
@@ -90,6 +90,7 @@ public class Controlador {
                         }
                         juego.siguientePasoCompletado(operacion);
                         break;
+                    
                 }
             }
         }

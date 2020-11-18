@@ -32,6 +32,7 @@ public class Casilla {
     Casilla(TituloPropiedad titulo){
         init();
         tituloPropiedad = titulo;
+        nombre = tituloPropiedad.getNombre();
         tipo = TipoCasilla.CALLE;
     }//Calle
     

@@ -38,15 +38,15 @@ public class TituloPropiedad {
     
     @Override
     public String toString(){
-        String resultado = "TituloPropiedad: \n\t" + "Nombre:" + this.nombre + "\n\t"
-                                             + "Alquiler Base:" + this.alquilerBase + "\n\t"
-                                             + "Factor Revalorizacion:" + this.factorRevalorizacion + "\n\t"
-                                             + "Hipoteca Base:" + this.hipotecaBase + "\n\t"
-                                             + "Precio Compra:" + this.precioCompra + "\n\t"
-                                             + "Precio Edificar:" + this.precioEdificar + "\n\t"
-                                             + "Numero de casas:" + this.numCasas + "\n\t"
-                                             + "Numero de hoteles:" + this.numHoteles + "\n\t"
-                                             + "Hipotecado:" + this.hipotecado + "\n\t";
+        String resultado = "Nombre:" + this.nombre + "\n\t"
+                           + "Alquiler Base:" + this.alquilerBase + "\n\t"
+                           + "Factor Revalorizacion:" + this.factorRevalorizacion + "\n\t"
+                           + "Hipoteca Base:" + this.hipotecaBase + "\n\t"
+                           + "Precio Compra:" + this.precioCompra + "\n\t"
+                           + "Precio Edificar:" + this.precioEdificar + "\n\t"
+                           + "Numero de casas:" + this.numCasas + "\n\t"
+                           + "Numero de hoteles:" + this.numHoteles + "\n\t"
+                           + "Hipotecado:" + this.hipotecado + "\n\t";
         
         return resultado;
     }

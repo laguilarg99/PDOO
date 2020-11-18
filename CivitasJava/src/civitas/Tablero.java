@@ -35,7 +35,7 @@ public class Tablero {
     }
     
     private boolean correcto(int numCasilla){
-        return correcto() && numCasilla > 0 && numCasilla < casillas.size();
+        return correcto() && numCasilla >= 0 && numCasilla < casillas.size();
     }
     
     int getCarcel(){

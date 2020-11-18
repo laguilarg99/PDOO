@@ -54,7 +54,7 @@ public class Dado {
         return (int)(jugador.nextDouble() * (n));
     }
         
-    void setDebug(Boolean d){
+    public void setDebug(Boolean d){
         debug = d;
         Diario diary = Diario.getInstance();
         if(d){ 
