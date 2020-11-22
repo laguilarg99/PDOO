@@ -84,8 +84,7 @@ public class Sorpresa {
             int tirada = tablero.calcularTirada(todos.get(actual).getNumCasillaActual(), dado.tirar());
             int posicion = tablero.nuevaPosicion(todos.get(actual).getNumCasillaActual(), tirada);
             todos.get(actual).moverACasilla(posicion);
-            //CASILLA -> RECIBE JUGADOR -> P3
-            
+            tablero.getCasilla(todos.get(actual).getNumCasillaActual()).recibeJugador(actual, todos);
         }
     }
     private void aplicarAJugador_irCarcel(int actual, ArrayList<Jugador> todos){

@@ -23,7 +23,7 @@ module Civitas
       
     attr_reader :numCasillaCarcel, :casillas
     
-    private
+    
     def correcto()
       return @casillas.count -1 > numCasillaCarcel
     end
@@ -33,7 +33,7 @@ module Civitas
       return correcto() && numCasilla > 0 && numCasilla < @casillas.length
     end
     
-    public
+    
     def por_salida()
       aux_salida = @porSalida
       
@@ -103,7 +103,7 @@ module Civitas
       end
     end
     
-    
+    #private_class_method :correcto
   end
 
 end

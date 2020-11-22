@@ -30,7 +30,7 @@ module Civitas
     end
     
     def self.new_CALLE(titulo)
-      new(nil,titulo,0,Civitas::Tipo_casilla::CALLE,nil,nil)
+      new(titulo.nombre,titulo,0,Civitas::Tipo_casilla::CALLE,nil,nil)
     end
     
     def self.new_IMPUESTO(cantidad, nombre)
@@ -46,7 +46,7 @@ module Civitas
       new(nombre,nil,0,Civitas::Tipo_casilla::SORPRESA,mazo,nil)
     end
     
-    private
+    
     def init()
       @nombre = nil
       @importe = -1
@@ -56,13 +56,27 @@ module Civitas
       @mazo = MazoSorpresas.new_mazo_sorpresas2
     end
     
-    private
+    
     def informe(iactual, todos)
       diary = Diario.instance
       diary.ocurre_evento("Jugador #{todos[iactual].nombre} ha caido en la casilla #{@nombre}")
     end
     
-    private
+    def recibe_jugador(iactual, todos)
+      case tipo
+      when Civitas::Tipo_casilla::CALLE
+        recibe_jugador_calle(iactual,todos)
+      when Civitas::Tipo_casilla::IMPUESTO
+        recibe_jugador_impuesto(iactual,todos)
+      when Civitas::Tipo_casilla::JUEZ
+        recibe_jugador_juez(iactual,todos)
+      when Civitas::Tipo_casilla::SORPRESA
+        recibe_jugador_sorpresa(iactual,todos)
+      else
+        informe(iactual,todos)
+      end
+    end
+    
     def recibe_jugador_impuesto(iactual,todos)
       if jugador_correcto(iactual, todos)
         informe(iactual,todos)
@@ -70,11 +84,30 @@ module Civitas
       end
     end
     
-    private
+    
     def recibe_jugador_juez(iactual, todos)
       if jugador_correcto(iactual,todos)
         informe(iactual,todos)
         todos[iactual].encarcelar(@@carcel)
+      end
+    end
+    
+    def recibe_jugador_sorpresa(iactual, todos)
+      if jugador_correcto(iactual,todos)
+        informe(iactual,todos)
+        @sorpresa = @mazo.siguiente();
+        @sorpresa.aplicar_a_jugador(iactual, todos)
+      end
+    end
+    
+    def recibe_jugador_calle(iactual, todos)
+      if jugador_correcto(iactual,todos)
+        informe(iactual,todos)
+        jugador = todos[iactual]
+        if @tituloPropiedad.tiene_propietario
+          jugador.puede_comprar_casilla
+          @tituloPropiedad.tramitar_alquiler(jugador)
+        end
       end
     end
     
@@ -91,7 +124,8 @@ module Civitas
     end
     
     
-    private_class_method :new
+    #private_class_method :new, :informe, :recibe_jugador_impuesto, :recibe_jugador_juez, :recibe_jugador_sorpresa
+    #private_class_method :recibe_jugador_calle, :init
     
     
   end

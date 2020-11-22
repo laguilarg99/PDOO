@@ -36,7 +36,7 @@ module Civitas
     
     public
     def al_mazo(s)
-      if @barajada == false
+      if !@barajada
         @sorpresas << s
       end
     end

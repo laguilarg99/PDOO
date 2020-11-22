@@ -406,10 +406,6 @@ public class Jugador implements Comparable<Jugador> {
                 TituloPropiedad propiedad = propiedades.get(ip);
                 puedoEdificarHotel = this.puedoEdificarHotel(propiedad);
                 float precio = propiedad.getPrecioEdificar();
-                if(this.puedoGastar(precio) && propiedad.getNumHoteles() < this.getHotelesMax() 
-                                            && propiedad.getNumCasas() > this.getCasasPorHotel()){
-                    puedoEdificarHotel = true;
-                }
                 if(puedoEdificarHotel){
                     result = propiedad.construirHotel(this);
                     casasPorHotel = getCasasPorHotel();
@@ -437,9 +433,6 @@ public class Jugador implements Comparable<Jugador> {
                 TituloPropiedad propiedad = propiedades.get(ip);
                 puedoEdificarCasa = this.puedoEdificarCasa(propiedad);
                 float precio = propiedad.getPrecioEdificar();
-                if(this.puedoGastar(precio) && propiedad.getNumCasas() < this.getCasasMax()){
-                    puedoEdificarCasa = true;
-                }
                 if(puedoEdificarCasa){
                     result = propiedad.construirCasa(this);
                     

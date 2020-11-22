@@ -8,10 +8,11 @@ require_relative 'tablero.rb'
 require_relative 'jugador.rb'
 
 module Civitas
-  class TestP2
+  class Juego_prueba
     def initialize
       
     end
+    
     def self.main
       
       jugadores = Array.new
@@ -22,29 +23,12 @@ module Civitas
       dado = Dado.instance
       
       juego = CivitasJuego.new(jugadores)
-      
-      puts juego.info_jugador_texto
-      puts"\n"
-      
-      juego.jugador_actual.mover_a_casilla(dado.tirar)
-      
-      puts juego.info_jugador_texto
-      puts"\n"
-      
-      juego.jugador_actual.encarcelar(5)
-      
-      puts juego.info_jugador_texto
-      puts"\n"
-      
-      puts juego.jugador_actual.mover_a_casilla(dado.tirar)
-      
-      juego.jugador_actual.modificar_saldo(-100)
-      
-      puts juego.info_jugador_texto
-      
+      vista = Vista_textual.new
+      controlador = Controlador.new(juego, vista)
+      controlador.juega
     end
   end
 
   
-  TestP2.main
+  Juego_prueba.main
 end

@@ -45,7 +45,14 @@ module Civitas
     end
     
     def cantidad_casas_hoteles
-      return @propiedades.length
+      cantidad = 0
+      
+      for i in @propiedades
+        cantidad = cantidad + i.numCasas + i.numHoteles
+      end
+      
+      return cantidad
+      
     end
     
     def is_encarcelado
@@ -135,7 +142,11 @@ module Civitas
     def modificar_saldo(cantidad)
       @saldo = @saldo + cantidad
       diary = Diario.instance
-      diary.ocurre_evento("Saldo aumentado: #{cantidad} para #{@nombre}")
+      if(cantidad < 0)
+        diary.ocurre_evento("Saldo disminuido #{cantidad} para #{@nombre}")
+      else
+        diary.ocurre_evento("Saldo aumentado #{cantidad} para #{@nombre}")
+      end
       return true
     end
     
@@ -153,7 +164,7 @@ module Civitas
     
     def paga_alquiler(cantidad)
       if is_encarcelado
-        return flase
+        return false
       else
         return paga(cantidad)
       end
@@ -252,7 +263,7 @@ module Civitas
       return @propiedades.length > 0
     end
     
-    public
+    
     def to_s
       "Jugador:  #{@nombre}  \n Saldo:  #{@saldo}  \nCasilla:   #{@numCasillaActual}  \nEncarcelado:  #{@encarcelado}"
     end
@@ -262,7 +273,7 @@ module Civitas
       if is_encarcelado
         result = false
       else
-        if existe_la_propiedad(ip)
+        if exite_la_propiedad(ip)
           if @propiedades[ip].vender(self)
             diary = Diario.instance
             diary.ocurre_evento("Propiedad: #{@propiedades[ip].nombre} \n Es vendida por: #{@nombre}")
@@ -274,6 +285,119 @@ module Civitas
         else
           result = false
         end
+      end
+      
+      return result
+    end
+    
+    def cancelar_hipoteca(ip)
+      result = false
+      
+      if is_encarcelado
+        return result
+      else
+        if exite_la_propiedad(ip)
+          propiedad = @propiedades[ip]
+          cantidad = propiedad.importe_cancelar_hipoteca
+          puedo_gastar = puedo_gastar(cantidad)
+          if(puedo_gastar)
+            result = propiedad.cancelar_hipteca(self)
+            if result
+              diary = Diario.instance
+              diary.ocurre_evento("El jugador #{self.nombre} \n cancela la hipoteca de la propiedad #{ip}")
+            end
+          end
+        end
+      end
+      
+      return result
+    end
+    
+    def comprar(titulo)
+      result = false
+      if is_encarcelado
+        return result
+      else
+        if @puedeComprar
+          precio = titulo.precioCompra
+          if puedo_gastar(precio)
+            result = titulo.comprar(self)
+            if(result)
+              @propiedades << titulo
+              diary = Diario.instance
+              diary.ocurre_evento("El jugador #{self.nombre} \n compra la propiedad #{titulo.to_s}")
+            end
+            
+            @puedeComprar = false;
+          end
+        end
+      end
+      
+      return result 
+    end
+    
+    def construir_hotel(ip)
+      resutl = false
+      puedoEdificarHotel = false
+      if is_encarceldo
+        return result
+      else
+        if exite_la_propiedad(ip)
+          propiedad = @propiedades[ip]
+          puedoEdificarHotel = puedo_edificar_hotel(propiedad)
+          precio = propiedad.precioEdificar
+          
+          if(puedo_edificar_hotel(propiedad))
+            result = propiedad.construirHotel(self)
+            casas = casasPorHotel
+            propiedad.derruir_casas(casas, self)
+            if result
+              diary = Diario.instance
+              diary.ocurre_evento("El jugador #{self.nombre} \n construye hotel en la propiedad #{ip}")
+            end
+          end
+        end
+      end
+    end
+    
+    def construir_casa(ip)
+      resutl = false
+      puedoEdificarCasa = false
+      if is_encarceldo
+        return result
+      else
+        if exite_la_propiedad(ip)
+          propiedad = @propiedades[ip]
+          puedoEdificarCasa = puedo_edificar_hotel(propiedad)
+          precio = propiedad.precioEdificar
+          
+          if(puedo_edificar_casa(propiedad))
+            result = propiedad.construirHotel(self)
+            if result
+              diary = Diario.instance
+              diary.ocurre_evento("El jugador #{self.nombre} \n construye casa en la propiedad #{ip}")
+            end
+          end
+        end
+      end
+      
+        return result
+    end
+    
+    def hipotecar(ip)
+      result = false
+      
+      if is_encarcelado
+        return result
+      else
+        if exite_la_propiedad(ip)
+          propiedad = @propiedades[ip]
+          result = propiedad.hipotecar(self)
+        end
+      end
+      if result
+        diary = Diario.instance
+        diary.ocurre_evento("El jugador #{self.nombre} \n hipoteca la propiedad #{ip}")
       end
       
       return result

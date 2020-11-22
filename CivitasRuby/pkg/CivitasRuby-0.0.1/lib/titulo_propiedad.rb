@@ -37,9 +37,14 @@ module Civitas
       @propietario = jugador
     end
     
-    private 
+    
     def precio_alquiler
-     
+     precio_alquiler = 0
+     if @hipotecado or propietarioEncarcelado
+       return precio_alquiler = 0
+     else
+       return precio_alquiler = @alquilerBase*(1+(@numCasas*0.5) + (@numHoteles*2.5))
+     end
     end
     
     def importe_cancelar_hipoteca
@@ -47,26 +52,33 @@ module Civitas
       return result
     end
     
-    private
+ 
     def es_este_el_propietario(jugador)
       return jugador == @propietario
     end
     
     def tramitar_alquiler(jugador)
-  
+      if(tiene_propietario && es_este_el_propietario(jugador))
+        jugador.paga_alquiler(precio_alquiler)
+        @propietario.recibe(precio_alquiler)
+      end
     end
     
-    private
+
     def propietarioEncarcelado
-         
+         if @propietario != nil
+           return @propietario.is_encarcelado
+         else
+           return false
+         end
     end
     
     def cantidad_casas_hoteles
       result = @numCasas + @numHoteles
       return result
     end
+   
     
-    private
     def precio_venta
       result = @precioCompra + (@numCasas+5*@numHoteles)*@precioEdificar*@factorRevalorizacion
       return result
@@ -97,12 +109,68 @@ module Civitas
       return @propietario != nil
     end
     
-    private
-    def importe_hipoteca
-      return @hipotecaBase
+
+    def cancelar_hipteca(jugador)
+      result = false
+      if @hipotecado and  es_este_el_propietario(jugador)
+        jugador.paga(importe_cancelar_hipoteca)
+        @hipotecado = false
+        result = true
+      end
+      return result
     end
     
-    attr_reader :precioEdificar, :numCasas, :numHoteles, :hipotecado, :nombre, :precioCompra, :propietario
+    def comprar(jugador)
+      result = false
+      
+      if !tiene_propietario
+        @propietario = jugador
+        result = true
+        jugador.paga(precioCompra)
+      end
+      
+      return result
+    end
+    
+    def contruirHotel(jugador)
+      result = false
+      
+      if es_este_el_propietario(jugador)
+        jugador.paga(precioEdificar)
+        @numHoteles = @numHoteles + 1
+        result = true
+      end
+      
+      return result
+    end
+    
+    def construirCasa(jugador)
+      result = false
+      
+      if es_este_el_propietario(jugador)
+        jugador.paga(precioEdificar)
+        @numCasas = @numCasas + 1
+        result = true
+      end
+      
+      return result
+    end
+    
+    def hipotecar(jugador)
+      salida = false
+      
+      if(!@hipotecado and es_este_el_propietario(jugador))
+        jugador.recibe(hipotecaBase)
+        @hipotecado = true
+        salida = true
+      end
+      
+      return salida
+    end
+    
+    attr_reader :precioEdificar, :numCasas, :numHoteles, :hipotecado, :nombre, :precioCompra, :propietario, :hipotecaBase
+    
+    #private_class_method  :precio_venta, :propietarioEncarcelado, :precio_alquiler
     
   end
 end
