@@ -96,7 +96,7 @@ module Civitas
     end
     
     def casilla(numCasilla)
-      if correcto(numCasilla)
+      if num_correcto(numCasilla)
         return @casillas[numCasilla]
       else
         return nil

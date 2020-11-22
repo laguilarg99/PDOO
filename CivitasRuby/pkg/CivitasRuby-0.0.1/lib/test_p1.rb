@@ -6,6 +6,8 @@ require_relative 'dado.rb'
 require_relative 'civitas_juego.rb'
 require_relative 'tablero.rb'
 require_relative 'jugador.rb'
+require_relative 'vista_textual.rb'
+require_relative 'controlador.rb'
 
 module Civitas
   class Juego_prueba
@@ -21,6 +23,7 @@ module Civitas
       jugadores << "Miguel"
       
       dado = Dado.instance
+      dado.set_debug(true)
       
       juego = CivitasJuego.new(jugadores)
       vista = Vista_textual.new

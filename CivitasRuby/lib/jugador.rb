@@ -37,7 +37,7 @@ module Civitas
       @propiedades = otro.propiedades
     end
     
-    attr_reader :nombre, :casaMax, :hotelesMax, :saldo, :casasPorHotel, :numCasillaActual, :precioLibertad, :pasoPorSalida, :pasoPorSalida, :puedeComprar, :propiedades
+    attr_reader :encarcelado, :nombre, :casaMax, :hotelesMax, :saldo, :casasPorHotel, :numCasillaActual, :precioLibertad, :pasoPorSalida, :pasoPorSalida, :puedeComprar, :propiedades
     
     
     def <=>(otro)
@@ -54,6 +54,7 @@ module Civitas
       return cantidad
       
     end
+    
     
     def is_encarcelado
       return @encarcelado
@@ -75,7 +76,6 @@ module Civitas
         return false
       else
         @numCasillaActual = numCasilla
-        @puedeComprar = false
         diary = Diario.instance
         diary.ocurre_evento("Jugador: #{@nombre} mueve a casilla #{@numCasillaActual}")
         return true

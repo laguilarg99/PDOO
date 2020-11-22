@@ -8,6 +8,8 @@ require_relative "gestor_estados.rb"
 require_relative "mazo_sorpresas.rb"
 require_relative "tablero.rb"
 require_relative "tipo_sorpresa.rb"
+require_relative "estados_juego.rb"
+require_relative "operaciones_juego.rb"
 
 module Civitas
  
@@ -76,11 +78,11 @@ module Civitas
     
   
     def pasar_turno
-      @indiceJugadorActual = (@indiceJugadorActual + 1)%@jugadores.lenght
+      @indiceJugadorActual = (@indiceJugadorActual + 1)%@jugadores.length
     end
     
     def siguiente_paso_completo(operacion)
-      @gestorEstados.siguiente_estado(@jugadores[@indiceJugadorActual], @estado, operacion)
+      @estado = @gestorEstados.siguiente_estado(@jugadores[@indiceJugadorActual], @estado, operacion)
     end
     
     def vender(ip)
@@ -96,7 +98,7 @@ module Civitas
     end
     
     def final_del_juego
-      for i in jugadores
+      for i in @jugadores
         if i.en_bancarrota
           result = true
           break
@@ -134,7 +136,7 @@ module Civitas
       casilla = @tablero.casilla(posicion_nueva)
       contabilizar_pasos_por_salida(jugador_actual)
       jugador_actual.mover_a_casilla(posicion_nueva)
-      casilla.recibe_jugador(posicion_actual, @jugadores)
+      casilla.recibe_jugador(@indiceJugadorActual, @jugadores)
       contabilizar_pasos_por_salida(jugador_actual)
     end
     
@@ -157,14 +159,14 @@ module Civitas
     def siguiente_paso()
       jugador_actual = @jugadores[@indiceJugadorActual]
       operacion = @gestorEstados.operaciones_permitidas(jugador_actual, @estado)
-      
+            
       case operacion
       when Civitas::Operaciones_juego::PASAR_TURNO
         pasar_turno
-        siguiente_paso_completado(operacion)
+        siguiente_paso_completo(operacion)
       when Civitas::Operaciones_juego::AVANZAR
         avanza_jugador
-        siguiente_paso_completado(operacion)
+        siguiente_paso_completo(operacion)
       end
       
       return operacion

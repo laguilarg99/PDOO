@@ -14,7 +14,6 @@ module Civitas
       @cartasEspeciales = Array.new
       @barajada = false
       @usadas = 0
-      @ultimaSorpresa = 0
       @debug = false
     end
     
@@ -52,6 +51,8 @@ module Civitas
       @ultimaSorpresa = @sorpresas[0]
       @sorpresas.delete_at(0)
       @sorpresas << @ultimaSorpresa
+      
+      return @ultimaSorpresa
     end
     
     def inhabilitar_carta_especial(sorpresa)

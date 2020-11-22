@@ -63,7 +63,7 @@ module Civitas
     end
     
     def recibe_jugador(iactual, todos)
-      case tipo
+      case @tipo
       when Civitas::Tipo_casilla::CALLE
         recibe_jugador_calle(iactual,todos)
       when Civitas::Tipo_casilla::IMPUESTO
@@ -116,7 +116,7 @@ module Civitas
     end
     
     def jugador_correcto(iactual, todos)
-      if iactual >= 0 && iactual < todos.length
+      if iactual >= 0 and iactual < todos.length
         return true
       else
         return false

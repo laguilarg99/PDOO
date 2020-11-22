@@ -44,19 +44,19 @@ module Civitas
     end
     
     def aplicar_a_jugador(actual, todos)
-      case tipo
+      case @tipo
       when Civitas::Tipo_sorpresa::IRCARCEL
-        aplicar_a_jugador_ir_carcel(actual,todos)
+        self.aplicar_a_jugador_ir_carcel(actual,todos)
       when Civitas::Tipo_sorpresa::IRCASILLA
-        aplicar_a_jugador_ir_a_casilla(actual,todos)
+        self.aplicar_a_jugador_ir_a_casilla(actual,todos)
       when Civitas::Tipo_sorpresa::PAGARCOBRAR
-        aplicar_a_jugador_pagar_cobrar(actual,todos)
+        self.aplicar_a_jugador_pagar_cobrar(actual,todos)
       when Civitas::Tipo_sorpresa::PORCASAHOTEL
-        aplicar_a_jugador_por_casa_hotel(actual,todos)
+        self.aplicar_a_jugador_por_casa_hotel(actual,todos)
       when Civitas::Tipo_sorpresa::PORJUGADOR
-        aplicar_a_jugador_por_jugador(actual,todos)
+        self.aplicar_a_jugador_por_jugador(actual,todos)
       when Civitas::Tipo_sorpresa::SALIRCARCEL
-        aplicar_a_jugador_salir_carcel(actual,todos)
+        self.aplicar_a_jugador_salir_carcel(actual,todos)
       end
     end
     
@@ -67,7 +67,7 @@ module Civitas
         tirada = @tablero.calcular_tirada(todos[actual].numCasillaActual, dado.tirar)
         posicion = @tablero.nuevaPosicion(todos[actual].numCasillaActual, tirada)
         todos[actual].mover_a_casilla(posicion)
-        #CASILLA -> RECIBE JUGADOR -> P3
+        @tablero.casilla(posicion).recibe_jugador(actual, todos)
       end
     end
     

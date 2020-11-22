@@ -2,14 +2,17 @@
 require_relative 'operaciones_juego'
 require 'io/console'
 require_relative 'respuestas.rb'
+require_relative 'gestiones_inmobiliarias.rb'
+require_relative 'salidas_carcel.rb'
+
 module Civitas
 
   class Vista_textual
     
-    
     Lista_respuestas = [Civitas::Respuestas::SI, Civitas::Respuestas::NO]
     Lista_gestion = [Civitas::Gestiones_inmobiliarias::VENDER, Civitas::Gestiones_inmobiliarias::HIPOTECAR, Civitas::Gestiones_inmobiliarias::CANCELAR_HIPOTECA, Civitas::Gestiones_inmobiliarias::CONSTRUIR_CASA, Civitas::Gestiones_inmobiliarias::CONSTRUIR_HOTEL, Civitas::Gestiones_inmobiliarias::TERMINAR]
     Lista_salir_carcel = [Civitas::Salidas_carcel::PAGANDO, Civitas::Salidas_carcel::TIRANDO]
+    
     def initialize
       @iGestion = -1
       @iPropiedad = -1
@@ -70,19 +73,31 @@ module Civitas
 
     def salirCarcel()
       titulo = "Elige la forma de salir de la carcel"
-      opcion = menu(titulo, Lista_salir_carcel)
+      salircarcel = Array.new
+      for i in Lista_salir_carcel
+        salircarcel << i.to_s
+      end
+      opcion = menu(titulo, salircarcel)
       return Lista_salir_carcel[opcion]
     end
     
     def comprar
-      titulo = "¿Desea comprar esta casilla? #{@juegoModel.getCasillaActual().to_s()}"
-      opcion = menu(titulo, Lista_respuestas)
+      titulo = "¿Desea comprar esta casilla? #{@juegoModel.casilla_actual.to_s()}"
+      respuestas = Array.new
+      for i in Lista_respuestas
+        respuestas << i.to_s
+      end
+      opcion = menu(titulo, respuestas)
       return Lista_respuestas[opcion] 
     end
 
     def gestionar
       titulo = "¿Que desea hacer?"
-      opcion = menu(titulo, Lista_gestion)
+      gestiones = Array.new
+      for i in Lista_gestion
+        gestiones << i.to_s
+      end
+      opcion = menu(titulo, gestiones)
       @iGestion = opcion;
       if(opcion != 5)
         tab = gets.chomp
@@ -113,7 +128,7 @@ module Civitas
       diary = Diario.instance
       
       while diary.eventos_pendientes
-        puts diary.leer_evento
+        puts "#{diary.leer_evento}\n"
       end
     end
     
