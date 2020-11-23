@@ -7,6 +7,7 @@ require_relative 'diario.rb'
 require_relative "tipo_casilla.rb"
 require_relative "mazo_sorpresas.rb"
 require_relative "titulo_propiedad.rb"
+
 module Civitas
   
 

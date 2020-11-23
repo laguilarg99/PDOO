@@ -33,7 +33,6 @@ module Civitas
     end
    
     
-    public
     def al_mazo(s)
       if !@barajada
         @sorpresas << s
@@ -46,7 +45,6 @@ module Civitas
         @sorpresas.shuffle
         @usadas = 0
       end
-      
       @usadas = @usadas + 1
       @ultimaSorpresa = @sorpresas[0]
       @sorpresas.delete_at(0)

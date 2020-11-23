@@ -10,6 +10,7 @@ require_relative "tablero.rb"
 require_relative "tipo_sorpresa.rb"
 require_relative "estados_juego.rb"
 require_relative "operaciones_juego.rb"
+require_relative "sorpresa.rb"
 
 module Civitas
  
@@ -29,13 +30,13 @@ module Civitas
       @indiceJugadorActual = @dado.quienEmpieza(nombres.length)
       
       @mazo = MazoSorpresas.new_mazo_sorpresas2
+      @tablero = Tablero.new(5)
       
       inicializa_tablero(@mazo)
       inicializa_mazo_sorpresas(@tablero)
     end
     
     def inicializa_tablero(mazo)
-      @tablero = Tablero.new(5)
       @tablero.añade_casilla(Casilla.new_CALLE(TituloPropiedad.new( "Calle de la Palmita", 10, 500, 250, 50, 150)))
       @tablero.añade_casilla(Casilla.new_CALLE(TituloPropiedad.new( "Calle de la Espartera", 10, 500, 250, 50, 150)))
       @tablero.añade_casilla(Casilla.new_SORPRESA(mazo, "Sorpresa1"))

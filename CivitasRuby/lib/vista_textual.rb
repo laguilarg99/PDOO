@@ -104,7 +104,7 @@ module Civitas
         titulo1 = "Sobre que propiedad: "
         properties = Array.new
         for i in @juegoModel.jugador_actual.propiedades
-          properties << i
+          properties << i.to_s
         end
         
         @iPropiedad = menu(titulo1, properties)

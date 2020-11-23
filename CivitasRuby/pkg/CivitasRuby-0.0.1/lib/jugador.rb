@@ -3,6 +3,8 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
+require_relative "titulo_propiedad.rb"
+
 module Civitas
   
   class Jugador
@@ -151,7 +153,7 @@ module Civitas
     end
     
     def paga(cantidad)
-      return modificarSaldo(-cantidad)
+      return modificar_saldo(-cantidad)
     end
     
     def paga_impuesto(cantidad)
@@ -195,11 +197,11 @@ module Civitas
       end
     end
     
-    def puedo_gastar
+    def puedo_gastar(precio)
       if is_encarcelado
         return false
       else
-        return @saldo
+        return @saldo >= precio
       end
     end
     
@@ -207,7 +209,7 @@ module Civitas
       if is_encarcelado
         return false
       else
-        if @propiedades.include?(propiedad) && @saldo >= propiedad.precioEdificar && @propiedad.cantidad_casas_hoteles < 8
+        if @propiedades.include?(propiedad) && @saldo >= propiedad.precioEdificar && propiedad.cantidad_casas_hoteles < 8
           return true
         else
           return false
@@ -219,7 +221,7 @@ module Civitas
       if is_encarcelado
         return false
       else
-        if @propiedades.include?(propiedad) && @saldo >= propiedad.precioEdificar && @propiedad.cantidad_casas_hoteles < 8 && @propiedad.numCasas >= 4
+        if @propiedades.include?(propiedad) && @saldo >= propiedad.precioEdificar && propiedad.cantidad_casas_hoteles < 8 && propiedad.numCasas >= 4
           return true
         else
           return false
@@ -231,7 +233,7 @@ module Civitas
       if is_encarcelado
         return false
       else
-        return modificarSaldo(cantidad)
+        return modificar_saldo(cantidad)
       end
     end
     
@@ -339,7 +341,7 @@ module Civitas
     def construir_hotel(ip)
       resutl = false
       puedoEdificarHotel = false
-      if is_encarceldo
+      if is_encarcelado
         return result
       else
         if exite_la_propiedad(ip)
@@ -347,8 +349,8 @@ module Civitas
           puedoEdificarHotel = puedo_edificar_hotel(propiedad)
           precio = propiedad.precioEdificar
           
-          if(puedo_edificar_hotel(propiedad))
-            result = propiedad.construirHotel(self)
+          if puedo_edificar_hotel(propiedad)
+            result = propiedad.construir_hotel(self)
             casas = casasPorHotel
             propiedad.derruir_casas(casas, self)
             if result
@@ -363,7 +365,7 @@ module Civitas
     def construir_casa(ip)
       resutl = false
       puedoEdificarCasa = false
-      if is_encarceldo
+      if is_encarcelado
         return result
       else
         if exite_la_propiedad(ip)
@@ -371,8 +373,8 @@ module Civitas
           puedoEdificarCasa = puedo_edificar_hotel(propiedad)
           precio = propiedad.precioEdificar
           
-          if(puedo_edificar_casa(propiedad))
-            result = propiedad.construirHotel(self)
+          if puedo_edificar_casa(propiedad)
+            result = propiedad.construir_casa(self)
             if result
               diary = Diario.instance
               diary.ocurre_evento("El jugador #{self.nombre} \n construye casa en la propiedad #{ip}")

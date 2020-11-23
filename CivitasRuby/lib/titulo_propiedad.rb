@@ -23,13 +23,13 @@ module Civitas
     
     def to_s
       "TituloPropiedad: \n\tNombre:  #{@nombre}  \n\t
-                                              Alquiler Base:  #{@alquilerBase}  \n\t
-                                              Factor Revalorizacion:  #{@factorRevalorizacion} + \n\t
-                                              Hipoteca Base:  #{@hipotecaBase}  \n\t
-                                              Precio Compra:  #{@precioCompra}  \n\t
-                                              Precio Edificar:  #{@precioEdificar}  \n\t
-                                              Numero de casas:  #{@numCasas}  \n\t
-                                              Numero de hoteles: #{@numHoteles}  \n\t
+                                              Alquiler Base:  #{@alquilerBase}\n\t
+                                              Factor Revalorizacion:  #{@factorRevalorizacion}\n\t
+                                              Hipoteca Base:  #{@hipotecaBase}\n\t
+                                              Precio Compra:  #{@precioCompra}\n\t
+                                              Precio Edificar:  #{@precioEdificar}\n\t
+                                              Numero de casas:  #{@numCasas}\n\t
+                                              Numero de hoteles: #{@numHoteles}\n\t
                                               Hipotecado:  #{@hipotecado}  \n\t";
     end
     
@@ -132,7 +132,7 @@ module Civitas
       return result
     end
     
-    def contruirHotel(jugador)
+    def construir_hotel(jugador)
       result = false
       
       if es_este_el_propietario(jugador)
@@ -144,7 +144,7 @@ module Civitas
       return result
     end
     
-    def construirCasa(jugador)
+    def construir_casa(jugador)
       result = false
       
       if es_este_el_propietario(jugador)
