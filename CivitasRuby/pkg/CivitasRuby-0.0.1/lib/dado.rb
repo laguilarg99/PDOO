@@ -41,7 +41,7 @@ module Civitas
     end
     
     def quienEmpieza(n)
-      jugador = rand(1..n)
+      jugador = rand(0..n-1)
       return jugador
     end
     

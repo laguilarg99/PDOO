@@ -63,11 +63,12 @@ module Civitas
             end
           end
         end
-        
-        for i in @juego.ranking
-          puts "#{i}\n"
-        end
       end
+      
+      for i in @juego.ranking
+          puts "#{i}\n"
+      end
+      
     end
 
   end

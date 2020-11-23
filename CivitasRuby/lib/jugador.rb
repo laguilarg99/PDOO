@@ -238,7 +238,7 @@ module Civitas
     end
     
     def salir_carcel_pagando
-      if is_encarcelado && puede_salir_pagando
+      if is_encarcelado && puede_salir_carcel_pagando
         paga(@@precioLibertad)
         @encarcelado = false
         diary = Diario.instance

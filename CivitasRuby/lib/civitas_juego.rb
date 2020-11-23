@@ -112,6 +112,7 @@ module Civitas
     end
     
     def casilla_actual
+      puts @indiceJugadorActual 
       return @tablero.casilla(@jugadores[@indiceJugadorActual].numCasillaActual)
     end
     

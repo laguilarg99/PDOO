@@ -10,37 +10,29 @@ module Civitas
   class Sorpresa
     
     
-    def initialize()
-      @valor = -1
-      @mazo = nil
-      @tablero = nil
+    def initialize(tipo, tablero, valor, texto, mazo)
+      @tipo = tipo
+      @valor = valor
+      @mazo = mazo
+      @tablero = tablero
+      @texto = texto
     end
     
     def self.new_IRCARCEL(tipo, tablero)
-      new
-      @tipo = tipo
-      @tablero = tablero
+      new(tipo, tablero,nil,"Ir a carcel",nil)
+      
     end
     
     def self.new_IRCASILLA(tipo, tablero, valor, texto)
-      new
-      @tipo = tipo
-      @tablero = tablero
-      @valor = valor
-      @texto = texto
+      new(tipo,tablero,valor,texto,nil)
     end
     
     def self.new_SALIRCARCEL(tipo, mazo)
-      new
-      @tipo = tipo
-      @mazo = mazo
+      new(tipo,nil,nil,"Salir carcel",mazo)
     end
     
     def self.new_SORPRESA(tipo, valor, texto)
-      new
-      @tipo = tipo
-      @valor = valor
-      @texto = texto
+      new(tipo,nil,valor,texto,nil)
     end
     
     def aplicar_a_jugador(actual, todos)
@@ -65,7 +57,7 @@ module Civitas
         informe(actual,todos)
         dado = Dado.instance
         tirada = @tablero.calcular_tirada(todos[actual].numCasillaActual, dado.tirar)
-        posicion = @tablero.nuevaPosicion(todos[actual].numCasillaActual, tirada)
+        posicion = @tablero.nueva_posicion(todos[actual].numCasillaActual, tirada)
         todos[actual].mover_a_casilla(posicion)
         @tablero.casilla(posicion).recibe_jugador(actual, todos)
       end
@@ -111,7 +103,7 @@ module Civitas
         informe(actual, todos)
         contador = 0
         for i in todos
-          if i.tiene_salvo_conducto(self)
+          if i.tiene_salvo_conducto
             contador = contador + 1
           end
         end
@@ -138,14 +130,14 @@ module Civitas
     end
     
     def salir_del_mazo
-      if tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
-        mazo.inhabilitar_carta_especial(self)
+      if @tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
+        @mazo.inhabilitar_carta_especial(self)
       end
     end
     
     def usada 
-      if tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
-        mazo.habilitar_carta_especial(self)
+      if @tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
+        @mazo.habilitar_carta_especial(self)
       end
     end
     
