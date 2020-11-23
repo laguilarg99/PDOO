@@ -61,6 +61,7 @@ module Civitas
             when Civitas::Salidas_carcel::TIRANDO
               @juego.salir_carcel_tirando
             end
+            @juego.siguiente_paso_completo(operacion)
           end
         end
       end

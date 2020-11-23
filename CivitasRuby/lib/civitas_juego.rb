@@ -35,7 +35,8 @@ module Civitas
       inicializa_tablero(@mazo)
       inicializa_mazo_sorpresas(@tablero)
     end
-    
+     
+    private
     def inicializa_tablero(mazo)
       @tablero.añade_casilla(Casilla.new_CALLE(TituloPropiedad.new( "Calle de la Palmita", 10, 500, 250, 50, 150)))
       @tablero.añade_casilla(Casilla.new_CALLE(TituloPropiedad.new( "Calle de la Espartera", 10, 500, 250, 50, 150)))
@@ -71,17 +72,19 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PORCASAHOTEL, -100, "Hay que pagar el mantenimiento de los edificios"))
     end
     
+   
     def contabilizar_pasos_por_salida(jugadorActual)
       if @tablero.por_salida > 0 and @jugadores[@indiceJugadorActual].numCasillaActual == 0
         jugadorActual.pasa_por_salida
       end
     end
     
-  
+    
     def pasar_turno
       @indiceJugadorActual = (@indiceJugadorActual + 1)%@jugadores.length
     end
     
+    public
     def siguiente_paso_completo(operacion)
       @estado = @gestorEstados.siguiente_estado(@jugadores[@indiceJugadorActual], @estado, operacion)
     end
@@ -112,7 +115,6 @@ module Civitas
     end
     
     def casilla_actual
-      puts @indiceJugadorActual 
       return @tablero.casilla(@jugadores[@indiceJugadorActual].numCasillaActual)
     end
     
@@ -129,6 +131,8 @@ module Civitas
       @jugadores[@indiceJugadorActual].to_s
     end
     
+    private
+    
     def avanza_jugador
       jugador_actual = @jugadores[@indiceJugadorActual]
       posicion_actual = jugador_actual.numCasillaActual
@@ -141,6 +145,8 @@ module Civitas
       casilla.recibe_jugador(@indiceJugadorActual, @jugadores)
       contabilizar_pasos_por_salida(jugador_actual)
     end
+    
+    public
     
     def cancelar_hipoteca(ip)
       return @jugadores[@indiceJugadorActual].cancelar_hipoteca(ip)
@@ -183,6 +189,6 @@ module Civitas
       return res
     end
     
-    #private_class_method :avanza_jugador, :contabilizar_pasos_por_salida, :pasar_turno, :inicializa_mazo_sorpresas, :inicializa_tablero
+  
   end
 end

@@ -39,14 +39,15 @@ module Civitas
     end
     
     def self.new_JUEZ(numCasillaCarcel, nombre)
-      new(nombre,nil,0,Civitas::Tipo_casilla::JUEZ,nil,nil)
       @@carcel = numCasillaCarcel
+      new(nombre,nil,0,Civitas::Tipo_casilla::JUEZ,nil,nil)
     end
     
     def self.new_SORPRESA(mazo,nombre)
       new(nombre,nil,0,Civitas::Tipo_casilla::SORPRESA,mazo,nil)
     end
     
+    private
     
     def init()
       @nombre = nil
@@ -63,6 +64,8 @@ module Civitas
       diary.ocurre_evento("Jugador #{todos[iactual].nombre} ha caido en la casilla #{@nombre}")
     end
     
+    
+    public
     def recibe_jugador(iactual, todos)
       case @tipo
       when Civitas::Tipo_casilla::CALLE
@@ -78,6 +81,7 @@ module Civitas
       end
     end
     
+    private
     def recibe_jugador_impuesto(iactual,todos)
       if jugador_correcto(iactual, todos)
         informe(iactual,todos)
@@ -112,9 +116,7 @@ module Civitas
       end
     end
     
-    def to_s
-      "Nombre: #{@nombre} \n"
-    end
+   
     
     def jugador_correcto(iactual, todos)
       if iactual >= 0 and iactual < todos.length
@@ -124,9 +126,13 @@ module Civitas
       end
     end
     
+    public
     
-    #private_class_method :new, :informe, :recibe_jugador_impuesto, :recibe_jugador_juez, :recibe_jugador_sorpresa
-    #private_class_method :recibe_jugador_calle, :init
+    def to_s
+      "Nombre: #{@nombre} \n"
+    end
+    
+    private_class_method :new
     
     
   end
