@@ -170,7 +170,6 @@ module Civitas
     
     attr_reader :precioEdificar, :numCasas, :numHoteles, :hipotecado, :nombre, :precioCompra, :propietario, :hipotecaBase
     
-    #private_class_method  :precio_venta, :propietarioEncarcelado, :precio_alquiler
     
   end
 end

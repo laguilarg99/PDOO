@@ -16,7 +16,7 @@ module Civitas
         @numCasillaCarcel = 1
       end
       @casillas = Array.new
-      @casillas << Casilla.new_DESCANSO("Salida")
+      @casillas << Casilla.new("Salida")
       @porSalida = 0
       @tieneJuez = false
     end
