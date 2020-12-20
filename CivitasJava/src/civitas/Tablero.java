@@ -87,7 +87,7 @@ public class Tablero {
     
     void añadeJuez(){//NO SE PASA COMO PARAMETRO NUMCARCEL
         if(!tieneJuez){
-            Casilla numJuez = new Casilla(numCasillaCarcel,"Juez");
+            CasillaJuez numJuez = new CasillaJuez(numCasillaCarcel,"Juez");
             this.añadeCasilla(numJuez);
             tieneJuez = true;
         }

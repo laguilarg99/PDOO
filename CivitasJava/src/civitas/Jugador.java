@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author luis
  */
 public class Jugador implements Comparable<Jugador> {
-    static  protected int casaMax = 4;
+    protected int casaMax = 4;
     static  protected int casasPorHotel = 4;
     protected boolean encarcelado;
     static  protected int hotelesMax = 4;
@@ -20,17 +20,17 @@ public class Jugador implements Comparable<Jugador> {
     static  protected float pasoPorSalida = 1000f;
     static  protected float precioLibertad = 200f;
     private boolean puedeComprar;
-    private float saldo;
-    private Sorpresa salvoconducto;
+    float saldo;
+    private SorpresaSalirCarcel salvoconducto;
     static private float saldoInicial = 7500;
-    private ArrayList<TituloPropiedad> propiedades;
+    ArrayList<TituloPropiedad> propiedades;
     
     
     Jugador(String nombre){
         this.nombre = nombre;
         encarcelado = false;
         numCasillaActual = 0;
-        puedeComprar = true;
+        puedeComprar = false;
         saldo = saldoInicial;
         salvoconducto = null;
         propiedades = new ArrayList<TituloPropiedad>();
@@ -56,11 +56,11 @@ public class Jugador implements Comparable<Jugador> {
         return nombre;
     }
     
-    private int getCasasMax(){
+    int getCasasMax(){
         return casaMax;
     }
     
-    private int getHotelesMax(){
+    int getHotelesMax(){
         return hotelesMax;
     }
     
@@ -85,7 +85,7 @@ public class Jugador implements Comparable<Jugador> {
     }
     
     boolean getPuedeComprar(){
-        return this.puedeComprarCasilla();
+        return this.puedeComprar;
     }
     
     public ArrayList<TituloPropiedad> getPropiedades(){ //Cambiada la visibilidad Protected -> Public para el método gestiones de la clase VistaTextual
@@ -165,7 +165,7 @@ public class Jugador implements Comparable<Jugador> {
     }
     
     
-    boolean obtenerSalvoconducto(Sorpresa s){
+    boolean obtenerSalvoconducto(SorpresaSalirCarcel s){
         if(encarcelado){
             return false;
         }else{
