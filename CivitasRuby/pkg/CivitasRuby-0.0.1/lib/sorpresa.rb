@@ -3,115 +3,16 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-
+require_relative 'jugador.rb'
+require_relative 'jugador_especulador.rb'
 
 module Civitas
   
   class Sorpresa
     
     
-    def initialize(tipo, tablero, valor, texto, mazo)
-      @tipo = tipo
-      @valor = valor
-      @mazo = mazo
-      @tablero = tablero
+    def initialize(texto)
       @texto = texto
-    end
-    
-    def self.new_IRCARCEL(tipo, tablero)
-      new(tipo, tablero,nil,"Ir a carcel",nil)
-      
-    end
-    
-    def self.new_IRCASILLA(tipo, tablero, valor, texto)
-      new(tipo,tablero,valor,texto,nil)
-    end
-    
-    def self.new_SALIRCARCEL(tipo, mazo)
-      new(tipo,nil,nil,"Salir carcel",mazo)
-    end
-    
-    def self.new_SORPRESA(tipo, valor, texto)
-      new(tipo,nil,valor,texto,nil)
-    end
-    
-    def aplicar_a_jugador(actual, todos)
-      case @tipo
-      when Civitas::Tipo_sorpresa::IRCARCEL
-        self.aplicar_a_jugador_ir_carcel(actual,todos)
-      when Civitas::Tipo_sorpresa::IRCASILLA
-        self.aplicar_a_jugador_ir_a_casilla(actual,todos)
-      when Civitas::Tipo_sorpresa::PAGARCOBRAR
-        self.aplicar_a_jugador_pagar_cobrar(actual,todos)
-      when Civitas::Tipo_sorpresa::PORCASAHOTEL
-        self.aplicar_a_jugador_por_casa_hotel(actual,todos)
-      when Civitas::Tipo_sorpresa::PORJUGADOR
-        self.aplicar_a_jugador_por_jugador(actual,todos)
-      when Civitas::Tipo_sorpresa::SALIRCARCEL
-        self.aplicar_a_jugador_salir_carcel(actual,todos)
-      end
-    end
-    
-    def aplicar_a_jugador_ir_a_casilla(actual, todos)
-      if jugador_correcto(actual, todos)
-        informe(actual,todos)
-        dado = Dado.instance
-        tirada = @tablero.calcular_tirada(todos[actual].numCasillaActual, dado.tirar)
-        posicion = @tablero.nueva_posicion(todos[actual].numCasillaActual, tirada)
-        todos[actual].mover_a_casilla(posicion)
-        @tablero.casilla(posicion).recibe_jugador(actual, todos)
-      end
-    end
-    
-    def aplicar_a_jugador_ir_carcel(actual, todos)
-      if jugador_correcto(actual,todos)
-        informe(actual,todos)
-        todos[actual].encarcelar(@tablero.numCasillaCarcel)
-      end
-    end
-    
-    def aplicar_a_jugador_pagar_cobrar(actual, todos)
-      if jugador_correcto(actual,todos)
-        informe(actual,todos)
-        todos[actual].modificar_saldo(@valor)
-      end
-    end
-    
-    def aplicar_a_jugador_por_casa_hotel(actual, todos)
-      if jugador_correcto(actual,todos)
-        informe(actual,todos)
-        todos[actual].modificar_saldo(todos[actual].cantidad_casa_hoteles*@valor)
-      end
-    end
-    
-    def aplicar_a_jugador_por_jugador(actual, todos)
-      if jugador_correcto(actual,todos)
-        informe(actual,todos)
-        pagar = Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PAGARCOBRAR, @valor * -1, "Pagan todos los jugadores")
-        for i in todos
-          if i.nombre != todos[actual].nombre
-            pagar.aplicar_a_jugador(i,todos)
-          end
-        end
-        cobrar = Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PAGARCOBRAR,@valor * ( todos.lenght - 1), "Cobra de todos los jugadores")
-        cobrar.aplicar_a_jugador(actual, todos)
-      end
-    end
-    
-    def aplicar_a_jugador_salir_carcel(actual, todos)
-      if jugador_correcto(actual, todos)
-        informe(actual, todos)
-        contador = 0
-        for i in todos
-          if i.tiene_salvo_conducto
-            contador = contador + 1
-          end
-        end
-        if contador == 0
-          todos[actual].obtener_salvo_conducto(self)
-          self.salir_del_mazo
-        end
-      end
     end
     
     def informe(actual, todos)
@@ -128,26 +29,13 @@ module Civitas
         return false
       end
     end
-    
-    def salir_del_mazo
-      if @tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
-        @mazo.inhabilitar_carta_especial(self)
-      end
-    end
-    
-    def usada 
-      if @tipo == Civitas::Tipo_sorpresa::SALIRCARCEL
-        @mazo.habilitar_carta_especial(self)
-      end
-    end
+   
     
     def to_s
-      "Tipo: #{@tipo} \nNombre: #{@texto}"
+      "\nNombre: #{@texto}"
     end
     
-    
-    private_class_method :new
-    
+    private_class_method  :new
   end
 
 end

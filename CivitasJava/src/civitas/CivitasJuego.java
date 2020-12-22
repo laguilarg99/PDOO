@@ -71,7 +71,7 @@ public class CivitasJuego {
         mazo.alMazo(new SorpresaPagarCobrar(1700));
         mazo.alMazo(new SorpresaIrCasilla(tablero, 8));
         mazo.alMazo(new SorpresaPagarCobrar(-500));
-        mazo.alMazo(new SorpresaPagarCobrar(-100));
+        mazo.alMazo(new SorpresaPorCasaHotel(-100));
         mazo.alMazo(new SorpresaConvertirJugador("Te conviertes en JugadorEspeculador", 200));
     }
     

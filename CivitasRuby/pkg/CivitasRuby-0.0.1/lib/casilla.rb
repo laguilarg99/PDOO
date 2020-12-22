@@ -26,9 +26,10 @@ module Civitas
       diary.ocurre_evento("Jugador #{todos[iactual].nombre} ha caido en la casilla #{@nombre}")
     end
     
-    
     def recibe_jugador(iactual, todos)
+      if jugador_correcto(iactual, todos)
         informe(iactual,todos)
+      end
     end
     
     def jugador_correcto(iactual, todos)

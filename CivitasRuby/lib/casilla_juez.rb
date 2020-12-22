@@ -12,7 +12,7 @@ module Civitas
     end
     
     
-    def recibe_jugador_juez(iactual, todos)
+    def recibe_jugador(iactual, todos)
       if jugador_correcto(iactual,todos)
         informe(iactual,todos)
         todos[iactual].encarcelar(@@carcel)

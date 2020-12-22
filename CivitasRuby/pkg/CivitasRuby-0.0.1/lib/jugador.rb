@@ -16,26 +16,32 @@ module Civitas
     @@saldoInicial = 7500
     
     def initialize(nombre)
+      
+      if nombre.is_a?(String)
       @nombre = nombre
       @encarcelado = false
       @numCasillaActual = 0
-      @puedeComprar = true
+      @puedeComprar = false
       @saldo = @@saldoInicial
       @salvoconducto = nil
       @propiedades = Array.new
+      end
+      if nombre.is_a? Jugador
+        new_JUGADOR_COPIA(nombre)
+      end
     end
     
     def self.new_JUGADOR(nombre)
       new(nombre)
     end
     
-    def self.new_JUGADOR_COPIA(otro)
+    def new_JUGADOR_COPIA(otro)
       @nombre = otro.nombre
       @encarcelado = otro.is_encarcelado
       @numCasillaActual = otro.numCasillaActual
       @puedeComprar = otro.puedeComprar
       @saldo = otro.saldo
-      @salvoconducto = otro.tiene_salvo_conducto
+      @salvoconducto = nil
       @propiedades = otro.propiedades
     end
     
@@ -78,6 +84,7 @@ module Civitas
         return false
       else
         @numCasillaActual = numCasilla
+        @puedeComprar = false;
         diary = Diario.instance
         diary.ocurre_evento("Jugador: #{@nombre} mueve a casilla #{@numCasillaActual}")
         return true
@@ -124,7 +131,7 @@ module Civitas
       end
     end
     
-    def perder_salvo_conducto
+    def perder_salvo_conducto(s)
       if is_encarcelado
         return false
       else

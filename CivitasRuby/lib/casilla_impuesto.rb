@@ -11,7 +11,7 @@ module Civitas
       @cantidad = cantidad;
     end
     
-    def recibe_jugador_impuesto(iactual,todos)
+    def recibe_jugador(iactual,todos)
       if jugador_correcto(iactual, todos)
         informe(iactual,todos)
         todos[iactual].paga_impuesto(@importe)

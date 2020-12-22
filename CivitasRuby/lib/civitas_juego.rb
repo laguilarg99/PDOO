@@ -7,7 +7,6 @@ require_relative "jugador.rb"
 require_relative "gestor_estados.rb"
 require_relative "mazo_sorpresas.rb"
 require_relative "tablero.rb"
-require_relative "tipo_sorpresa.rb"
 require_relative "estados_juego.rb"
 require_relative "operaciones_juego.rb"
 require_relative "sorpresa.rb"
@@ -60,16 +59,17 @@ module Civitas
     
     
     def inicializa_mazo_sorpresas(tablero)
-      @mazo.al_mazo(Sorpresa.new_IRCARCEL(Civitas::Tipo_sorpresa::IRCARCEL, tablero))
-      @mazo.al_mazo(Sorpresa.new_IRCASILLA(Civitas::Tipo_sorpresa::IRCASILLA, tablero, 0, "Vuelve a la casilla salida sin cobrar"))
-      @mazo.al_mazo(Sorpresa.new_SALIRCARCEL(Civitas::Tipo_sorpresa::SALIRCARCEL, @mazo))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PAGARCOBRAR, -1000, "Toca pagar facturas"))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PORCASAHOTEL, 100, "Van bien los negocios"))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PORJUGADOR, 200, "Tus amigos te devuelven tu dinero"))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PAGARCOBRAR, 1700, "Cobras la beca de la universidad"))
-      @mazo.al_mazo(Sorpresa.new_IRCASILLA(Civitas::Tipo_sorpresa::IRCASILLA, tablero, 8, "Nos vamos de viaje, ve a la casilla sin pasar por la salida "))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PAGARCOBRAR, -500, "Te ha pillado el radar duplicando el limite de velocidad"))
-      @mazo.al_mazo(Sorpresa.new_SORPRESA(Civitas::Tipo_sorpresa::PORCASAHOTEL, -100, "Hay que pagar el mantenimiento de los edificios"))
+#      @mazo.al_mazo(SorpresaIrCarcel.new(tablero))
+#      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 0))
+#      @mazo.al_mazo(SorpresaSalirCarcel.new(@mazo))
+#      @mazo.al_mazo(SorpresaPagarCobrar.new(-1000))
+#      @mazo.al_mazo(SorpresaPagarCobrar.new(100))
+#      @mazo.al_mazo(SorpresaPorJugador.new(200))
+#      @mazo.al_mazo(SorpresaPagarCobrar.new(1700))
+#      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 8))
+#      @mazo.al_mazo(SorpresaPagarCobrar.new(-500))
+#      @mazo.al_mazo(SorpresaPorCasaHotel.new( -100))
+      @mazo.al_mazo(SorpresaConvertirJugador.new("JugadorEspeculador", 100))
     end
     
    

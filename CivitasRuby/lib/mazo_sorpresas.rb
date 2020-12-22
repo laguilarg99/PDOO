@@ -4,6 +4,13 @@
 # and open the template in the editor.
 
 require_relative 'sorpresa.rb'
+require_relative 'sorpresa_ir_carcel.rb'
+require_relative 'sorpresa_ir_casilla.rb'
+require_relative 'sorpresa_pagar_cobrar.rb'
+require_relative 'sorpresa_por_casa_hotel.rb'
+require_relative 'sorpresa_por_jugador.rb'
+require_relative 'sorpresa_salir_carcel.rb'
+require_relative 'sorpresa_convertir_jugador.rb'
 
 module Civitas
   

@@ -4,6 +4,11 @@
 # and open the template in the editor.
 
 require_relative 'casilla.rb'
+require_relative 'casilla_calle.rb'
+require_relative 'casilla_impuesto.rb'
+require_relative 'casilla_juez.rb'
+require_relative 'casilla_sorpresa.rb'
+
 module Civitas
   
   class Tablero
@@ -53,7 +58,7 @@ module Civitas
         comprobar = comprobar + 1
         
         if @numCasillaCarcel == @casillas.length
-          @casillas << Casilla.new_JUEZ(@numCasillaCarcel,"Carcel")
+          @casillas << CasillaJuez.new(@numCasillaCarcel,"Carcel")
         end
         
         if insertar
@@ -66,7 +71,7 @@ module Civitas
     
     def añade_juez()
       if !@tieneJuez
-        juez = Casilla.new_DESCANSO("Juez")
+        juez = Casilla.new("Juez")
         self.añade_casilla(juez)
         @tieneJuez = true
       end
@@ -102,8 +107,7 @@ module Civitas
         return nil
       end
     end
-    
-    #private_class_method :correcto
+
   end
 
 end

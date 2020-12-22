@@ -7,19 +7,18 @@ module Civitas
   class CasillaCalle < Casilla
     
     def initialize(tituloPropiedad)
-      super(tituloPropiedad.nombre)
+      super(tituloPropiedad.nombre)   
       @tituloPropiedad = tituloPropiedad
-      
     end
     
-    
-    def recibe_jugador_calle(iactual, todos)
+    def recibe_jugador(iactual, todos)
       if jugador_correcto(iactual,todos)
         informe(iactual,todos)
         jugador = todos[iactual]
         if @tituloPropiedad.tiene_propietario
-          jugador.puede_comprar_casilla
           @tituloPropiedad.tramitar_alquiler(jugador)
+        else
+          jugador.puede_comprar_casilla
         end
       end
     end
