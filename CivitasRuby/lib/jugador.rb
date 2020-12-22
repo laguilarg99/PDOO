@@ -16,8 +16,6 @@ module Civitas
     @@saldoInicial = 7500
     
     def initialize(nombre)
-      
-      if nombre.is_a?(String)
       @nombre = nombre
       @encarcelado = false
       @numCasillaActual = 0
@@ -25,10 +23,6 @@ module Civitas
       @saldo = @@saldoInicial
       @salvoconducto = nil
       @propiedades = Array.new
-      end
-      if nombre.is_a? Jugador
-        new_JUGADOR_COPIA(nombre)
-      end
     end
     
     def self.new_JUGADOR(nombre)

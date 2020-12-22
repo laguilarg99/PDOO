@@ -10,7 +10,7 @@ module Civitas
     
     def initialize(jugador,fianza)
       @fianza = fianza
-      super(jugador)
+      new_JUGADOR_COPIA(jugador)
     end
     
     
@@ -21,7 +21,7 @@ module Civitas
     end
     
     def self.new_Especulador(jugador, fianza)
-      jugador_especulador = new
+      jugador_especulador = new(jugador,fianza)
       jugador_especulador.actualiza_propietario_por_conversion()
       return jugador_especulador
     end
@@ -66,7 +66,5 @@ module Civitas
       "Jugador Especulador:  #{@nombre.to_s}  \n Saldo:  #{@saldo.to_s}  \nCasilla:   #{@numCasillaActual.to_s}  \nEncarcelado:  #{@encarcelado.to_s}"
     end
     
-    
-    #private_class_method :new
   end
 end

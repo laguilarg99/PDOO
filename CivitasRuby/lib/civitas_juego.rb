@@ -59,16 +59,16 @@ module Civitas
     
     
     def inicializa_mazo_sorpresas(tablero)
-#      @mazo.al_mazo(SorpresaIrCarcel.new(tablero))
-#      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 0))
-#      @mazo.al_mazo(SorpresaSalirCarcel.new(@mazo))
-#      @mazo.al_mazo(SorpresaPagarCobrar.new(-1000))
-#      @mazo.al_mazo(SorpresaPagarCobrar.new(100))
-#      @mazo.al_mazo(SorpresaPorJugador.new(200))
-#      @mazo.al_mazo(SorpresaPagarCobrar.new(1700))
-#      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 8))
-#      @mazo.al_mazo(SorpresaPagarCobrar.new(-500))
-#      @mazo.al_mazo(SorpresaPorCasaHotel.new( -100))
+      @mazo.al_mazo(SorpresaIrCarcel.new(tablero))
+      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 0))
+      @mazo.al_mazo(SorpresaSalirCarcel.new(@mazo))
+      @mazo.al_mazo(SorpresaPagarCobrar.new(-1000))
+      @mazo.al_mazo(SorpresaPagarCobrar.new(100))
+      @mazo.al_mazo(SorpresaPorJugador.new(200))
+      @mazo.al_mazo(SorpresaPagarCobrar.new(1700))
+      @mazo.al_mazo(SorpresaIrCasilla.new(tablero, 8))
+      @mazo.al_mazo(SorpresaPagarCobrar.new(-500))
+      @mazo.al_mazo(SorpresaPorCasaHotel.new( -100))
       @mazo.al_mazo(SorpresaConvertirJugador.new("JugadorEspeculador", 100))
     end
     
