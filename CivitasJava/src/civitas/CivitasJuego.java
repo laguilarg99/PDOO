@@ -8,6 +8,7 @@ package civitas;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import GUI.Dado;
 
 /**
  *

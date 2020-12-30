@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juegoTexto;
+package GUI;
 
 import civitas.CivitasJuego;
 import GUI.Dado;
-import juegoTexto.Controlador;
-import juegoTexto.VistaTextual;
+import GUI.Controlador;
+import GUI.CivitasView;   
 
-import GUI.Dado;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,17 +17,22 @@ import java.util.Arrays;
  *
  * @author luis
  */
-public class JuegoPrueba {
+public class TestP5 {
     
     public static void main(String[] args){
-       ArrayList<String> jugadores = new ArrayList<>(Arrays.asList("Luis", "Fran", "Miguel")); 
+       CivitasView vista = new CivitasView();
+       Dado.createInstance(vista);
        Dado dado = Dado.getInstance();
-       dado.setDebug(Boolean.TRUE);
+       dado.setDebug(true);
+       
+       CapturaNombres nombre = new CapturaNombres(vista,true);
+       ArrayList<String> jugadores = new ArrayList<>();
+       jugadores = nombre.getNombres();
        
        CivitasJuego nuevo = new CivitasJuego(jugadores);
-       VistaTextual vista = new VistaTextual();
        Controlador control = new Controlador(nuevo,vista);
-       control.juega();
        
+       vista.setCivitasJuego(nuevo);
+       vista.actualizarVista();
     }
 }

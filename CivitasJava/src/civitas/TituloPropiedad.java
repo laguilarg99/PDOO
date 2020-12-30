@@ -124,11 +124,11 @@ public class TituloPropiedad {
         return precioEdificar;
     }
     
-    int getNumCasas(){
+    public int getNumCasas(){
         return numCasas;
     }
     
-    int getNumHoteles(){
+    public int getNumHoteles(){
         return numHoteles;
     }
     
@@ -140,7 +140,7 @@ public class TituloPropiedad {
         return hipotecaBase;
     }
     
-    String getNombre(){
+    public String getNombre(){
         return this.nombre;
     }
     

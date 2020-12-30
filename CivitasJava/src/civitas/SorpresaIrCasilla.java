@@ -5,6 +5,7 @@
  */
 package civitas;
 
+import GUI.Dado;
 import java.util.ArrayList;
 
 /**

@@ -6,6 +6,7 @@
 package civitas;
 
 import java.util.ArrayList;
+import GUI.Dado;
 /**
  *
  * @author luis
@@ -26,7 +27,7 @@ public class Jugador implements Comparable<Jugador> {
     ArrayList<TituloPropiedad> propiedades;
     
     
-    Jugador(String nombre){
+    public Jugador(String nombre){
         this.nombre = nombre;
         encarcelado = false;
         numCasillaActual = 0;
@@ -52,7 +53,7 @@ public class Jugador implements Comparable<Jugador> {
         return compare;
     }
     
-    protected String getNombre(){
+    public String getNombre(){
         return nombre;
     }
     
@@ -64,7 +65,7 @@ public class Jugador implements Comparable<Jugador> {
         return hotelesMax;
     }
     
-    protected float getSaldo(){
+    public float getSaldo(){
         return this.saldo;
     }
     
