@@ -8,6 +8,9 @@ package GUI;
 import civitas.CivitasJuego;
 import civitas.Casilla;
 import civitas.OperacionesJuego;
+import javax.swing.JOptionPane;
+import civitas.SalidasCarcel;
+
 /**
  *
  * @author luis
@@ -17,6 +20,9 @@ public class CivitasView extends javax.swing.JFrame {
     CivitasJuego juego;
     JugadorPanel jugadorPanel;
     CasillaPanel casillaPanel;
+    GestionarDialog gestionarD;
+   
+    
     /**
      * Creates new form CivitasView
      */
@@ -24,8 +30,7 @@ public class CivitasView extends javax.swing.JFrame {
         initComponents();
         jugadorPanel = new JugadorPanel();
         this.contenedorVistaJugador.add(jugadorPanel);
-        this.jTextArea1.setVisible(false);
-        this.jLabel3.setVisible(false);
+        
         repaint();
         revalidate();
     }
@@ -34,18 +39,23 @@ public class CivitasView extends javax.swing.JFrame {
         jugadorPanel.setJugador(juego.getJugadorActual());
         rellenaCasilla(juego.getCasillaActual());
         mostrarSiguienteOperacion(juego.siguientePaso());
-        
+        this.jTextArea1.setVisible(false);
+        this.jLabel3.setVisible(false);
         if(juego.finalDelJuego()){
-            String result = " ";
-            for(int i = 0; i < juego.ranking().size(); i++)
-                result = result + juego.ranking().get(i) + "\n";
-            this.jTextArea1.setText(result);
             this.jTextArea1.setVisible(true);
             this.jLabel3.setVisible(true);
-            repaint();
-            revalidate();
+            System.out.println("Final");
+            String result = " ";
+            for(int i = 0; i < juego.ranking().size(); i++)
+                result = result + juego.ranking().get(i).getNombre() + "\n";
+            
+            this.jTextArea1.setText(result);  
         }
+        repaint();
+        revalidate();
     }
+    
+    
 
     public void setCivitasJuego(CivitasJuego juego){
         this.juego = juego;
@@ -71,6 +81,39 @@ public class CivitasView extends javax.swing.JFrame {
         revalidate();
     }
     
+    public void mostrarEventos(){
+        DiarioDialog diarioD = new DiarioDialog(this,true);
+        diarioD.repaint();
+        diarioD.revalidate();
+    }
+    
+    public Respuestas comprar(){
+        int opcion = JOptionPane.showConfirmDialog(null,  "¿Quieres comprar la calle actual?", "Compra", JOptionPane.YES_NO_OPTION);
+        return (Respuestas.values()[opcion]);
+    }
+    
+    public void gestionar(){
+        gestionarD = new GestionarDialog(this,true);
+        gestionarD.gestionar(this.juego.getJugadorActual());
+        gestionarD.pack();
+        gestionarD.repaint();
+        gestionarD.revalidate();
+        gestionarD.setVisible(true);
+    }
+    
+     public int getGestion(){
+        return gestionarD.getGestion();
+    }
+    
+    public int getPropiedad(){
+        return gestionarD.getPropiedad();
+    }
+
+    public SalidasCarcel salirCarcel(){
+        String[] opciones = {"Pagando","Tirando el dado"};
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Cómo quieres salir de la cárcel?", "Salir de la Cárcel", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+        return (SalidasCarcel.values()[respuesta]);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

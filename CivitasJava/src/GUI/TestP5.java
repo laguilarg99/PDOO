@@ -33,6 +33,6 @@ public class TestP5 {
        Controlador control = new Controlador(nuevo,vista);
        
        vista.setCivitasJuego(nuevo);
-       vista.actualizarVista();
+       control.juega();
     }
 }

@@ -41,8 +41,9 @@ public class CivitasJuego {
     }
     
     private void inicializaTablero(MazoSorpresas mazo){
+        
         tablero = new Tablero(5);
-        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad( "Calle de la Palmita", 10, 500, 250, 50, 150)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad( "Calle de la Palmita", 10, 500, 250, 7500, 150)));
         tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad( "Calle de la Espartera", 10, 500, 250, 50, 150)));
         tablero.añadeCasilla(new CasillaSorpresa(mazo, "Sorpresa1"));
         tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad( "Calle Valle Gran Rey", 11, 600, 300, 60, 300)));
