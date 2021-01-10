@@ -30,7 +30,8 @@ public class CivitasView extends javax.swing.JFrame {
         initComponents();
         jugadorPanel = new JugadorPanel();
         this.contenedorVistaJugador.add(jugadorPanel);
-        
+        this.jTextArea1.setVisible(false);
+        this.jLabel3.setVisible(false);
         repaint();
         revalidate();
     }
@@ -39,16 +40,13 @@ public class CivitasView extends javax.swing.JFrame {
         jugadorPanel.setJugador(juego.getJugadorActual());
         rellenaCasilla(juego.getCasillaActual());
         mostrarSiguienteOperacion(juego.siguientePaso());
-        this.jTextArea1.setVisible(false);
-        this.jLabel3.setVisible(false);
         if(juego.finalDelJuego()){
             this.jTextArea1.setVisible(true);
             this.jLabel3.setVisible(true);
             System.out.println("Final");
-            String result = " ";
+            String result = "";
             for(int i = 0; i < juego.ranking().size(); i++)
                 result = result + juego.ranking().get(i).getNombre() + "\n";
-            
             this.jTextArea1.setText(result);  
         }
         repaint();

@@ -95,7 +95,5 @@ public class Controlador {
             }
         }
         
-        for(int i = 0; i < juego.ranking().size(); i++)
-            System.out.println(juego.ranking().get(i) + "\n");
     }
 }

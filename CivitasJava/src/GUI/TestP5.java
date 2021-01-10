@@ -34,5 +34,6 @@ public class TestP5 {
        
        vista.setCivitasJuego(nuevo);
        control.juega();
+       vista.actualizarVista();
     }
 }

@@ -131,7 +131,7 @@ public class Jugador implements Comparable<Jugador> {
     }
     
     boolean enBancarrota(){
-        if(this.saldo < 0){
+        if(this.saldo <= 0){
             return true;
         }else{
             return false;
