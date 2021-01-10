@@ -23,7 +23,7 @@ public class TestP5 {
        CivitasView vista = new CivitasView();
        Dado.createInstance(vista);
        Dado dado = Dado.getInstance();
-       dado.setDebug(true);
+       //dado.setDebug(true);
        
        CapturaNombres nombre = new CapturaNombres(vista,true);
        ArrayList<String> jugadores = new ArrayList<>();
